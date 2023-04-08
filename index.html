@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Moody Kittens | CodeWorks</title>
   <link rel="shortcut icon" href="moody-logo.png" type="image/x-icon">
-  <link href="https://fonts.googleapis.com/css?family=Catamaran&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cabin&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -20,6 +20,13 @@
         <button class="btn-special" type="submit">
           /ᐠ｡ꞈ｡ᐟ\
         </button>
+        <audio id="hiss" src="angry-cat-meow-82091.mp3"></audio>
+        <audio id="treat" src="cat-3-43850.mp3"></audio>
+        <audio id="purr" src="shorttabbypurr-43723.mp3"></audio>
+        <audio id="spray" src="the-aerosol-spray-117048.mp3"></audio>
+        <audio id="explode" src="bomb-voice-imitation-81714.mp3"></audio>
+        <audio id="see-ya" src="abrir-puerta-48200.mp3"></audio>
+        <audio id="mouse-click" src="click-21156.mp3"></audio>
       </div>
     </form>
   </header>
@@ -28,18 +35,23 @@
       <div class="card p-2 text-center w-50">
         <img class="logo" src="moody-logo.png" height="250" alt="Moody Kittens">
         <div id="greeting" class="card mt-2">
-          <b class="text-center greeting">Hello Human...</b>
-          <p><b>I demand scratches. And some of that sweet, sweet catnip...but don't slack on those scratches, meow!!</b></p>
-          <strong>Keep me happy! Or I shall eat your mouse!</strong>
+          <b class="text-center greeting">HELLO HUMAN...</b>
+          <p><b>I DEMAND SCRATCHES.<br>
+             AND SOME OF TH...<br>
+             <br><span>OOO SHINY BUTTONS!!!</span><br>
+             <br>...WAIT WHERE WAS I...?<br>
+             OH YES...SOME SWEET, SWEET CATNIP...<br>
+             BUT DON'T SLACK ON THOSE SCRATCHES, MEOW!!</br></p>
+          <strong>KEEP ME HAPPY. OR I SHALL EAT YOUR MOUSE!</strong>
           <br>
         </div>
-        <button onclick="getStarted()">Get Started</button>
+        <button class="shimmer" onclick="getStarted()">Get Started</button>
       </div>
     </div>
     <div class="p-2 shadow">
       <div id="kittens" class="kitten d-flex align-items-center flex-wrap">
       </div>
-      <button type="submit" onclick="clearKittens()">Explode Kittens</button>
+      <button class="btn-cancel shimmer" type="submit" onclick="clearKittens()">Explode All Kittens!</button>
   </main>
   <footer class="card bg-dark text-light p-2 d-flex align-items-center justify-content-center">
     <small>Created with <span style="color: var(--primary)">&hearts;</span> by CodeWorks</small>
