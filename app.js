@@ -1,3 +1,4 @@
+// @ts-nocheck
 
 let kittens = []
 const kitten = {}
