@@ -1,4 +1,17 @@
+// @ts-nocheck
 let kittens = []
+
+let kittenImg = {
+  happy: "https://c.tenor.com/Z0owBbOn9v0AAAAd/tenor.gif",
+  fine: "https://media.tenor.com/images/a412fc62c095ba9901f96a803fd279ad/tenor.gif",
+  upset: "https://c.tenor.com/-2X9RJQkqhgAAAAd/tenor.gif",
+  mad: "https://media.tenor.com/images/fc1cc672a99a7e3cda46381f871e45f7/tenor.gif",
+  run: "https://i.pinimg.com/originals/04/c4/30/04c4304d9a96d26ac76c4f0a95834fb1.gif",
+}
+
+
+
+
 /**
  * Called when submitting the new Kitten Form
  * This method will pull data from the form
@@ -7,6 +20,18 @@ let kittens = []
  * Then reset the form
  */
 function addKitten(event) {
+  event.preventDefault()
+  let form = event.target
+  let kitten = {
+    id: generateId(),
+    name: form.name.value,
+    mood: "tolerant",
+    affection: 5
+  }
+  kittens.push(kitten)
+  saveKittens()
+  form.reset()
+  drawKittens()
 }
 
 /**
@@ -14,6 +39,7 @@ function addKitten(event) {
  * Saves the string to localstorage at the key kittens 
  */
 function saveKittens() {
+  window.localStorage.setItem("kittens", JSON.stringify(kittens))
 }
 
 /**
@@ -22,13 +48,38 @@ function saveKittens() {
  * the kittens array to the retrieved array
  */
 function loadKittens() {
+  let storedKittens = JSON.parse(window.localStorage.getItem("kittens"))
+    if (storedKittens){
+      kittens = storedKittens
+    }
 }
 
 /**
  * Draw all of the kittens to the kittens element
  */
 function drawKittens() {
+  let kittenListElem = document.getElementById("kittens")
+  let kittensTemplate = ""
+  kittens.forEach(kitten =>{
+    kittensTemplate += `
+    <div id="cat-card" class="container m-3">
+      <div class="p-1 kitten ${kitten.mood}  " >
+        <img  src="${kitten.img}" height="170px"  /> 
+        <div class="p-1">
+          <h3 class="mt-3 mb-3">Name: ${kitten.name}</h3>
+          <h3 class="mt-3 mb-3">Mood: ${kitten.mood}</h3>
+          <h3 class="mt-3 mb-3">Affection: ${kitten.affection}</h3>
+        </div>
+          <button onclick="pet('${kitten.id}')">Pet</button>
+          <button onclick="catnip('${kitten.id}')">Catnip</button>
+          <button onclick="sprayBottle('${kitten.id}')">Spray Bottle</button>
+      </div>
+    </div>`    
+  })
+  kittenListElem.innerHTML = kittensTemplate;
 }
+
+
 
 
 /**
@@ -37,7 +88,11 @@ function drawKittens() {
  * @return {Kitten}
  */
 function findKittenById(id) {
-}
+  return kittens.find(kitten => kitten.id === id)
+};
+
+
+
 
 
 /**
@@ -49,6 +104,16 @@ function findKittenById(id) {
  * @param {string} id 
  */
 function pet(id) {
+  let kitten = findKittenById(id);
+  let random = Math.random();
+  if (random > 0.5) {
+    kitten.affection += 1;
+  } else {
+    kitten.affection = 10;
+  }
+  setKittenMood(kitten);
+  saveKittens();
+  drawKittens();
 }
 
 /**
@@ -58,20 +123,62 @@ function pet(id) {
  * @param {string} id
  */
 function catnip(id) {
+  let kitten = findKittenById(id);
+  kitten.affection = 5;
+  if (kitten.affection  <= 7) {
+    kitten.img = kittenImg.fine;
+    kitten.mood = "tolerant";
+
+  }
+  kitten.affection++; // Will only make kitten so happy
+  saveKittens();
+  drawKittens();
+}
+
+function sprayBottle(id) {
+  let kitten = findKittenById(id);
+  kitten.affection--;  //angers kitten -1 per spray
+  setKittenMood(kitten);
+  saveKittens();
+  drawKittens();
 }
 
 /**
  * Sets the kittens mood based on its affection
- * @param {Kitten} kitten 
- */
+ * @param {Kitten} kitten
+*/
 function setKittenMood(kitten) {
+  if (kitten.affection >= 7) {
+    kitten.img = kittenImg.happy;
+    kitten.mood = "happy";
+
+  }
+  if (kitten.affection  <= 7) {
+    kitten.img = kittenImg.fine;
+    kitten.mood = "tolerant";
+
+  }
+  if (kitten.affection <= 4) {
+    kitten.img = kittenImg.upset;
+    kitten.mood = "frustrated";
+
+  }
+  if (kitten.affection <= 2) {
+    kitten.img = kittenImg.mad;
+    kitten.mood = "angry";
+
+  }
+  if (kitten.affection == 0) {
+    kitten.img = kittenImg.run;
+    kitten.mood = 'gone';
+
+  }
 }
 
-/**
- * Removes all of the kittens from the array
- * remember to save this change
- */
 function clearKittens(){
+  kittens = []; // removes all kittens from the array
+  saveKittens(); // save the empty array to localstorage
+  drawKittens(); // draws empty array of kittens
 }
 
 /**
@@ -79,18 +186,17 @@ function clearKittens(){
  * list of kittens to the page. Good Luck
  */
 function getStarted() {
-  document.getElementById("welcome").remove();
-  console.log('Good Luck, Take it away')
+  let welcome = document.getElementById("welcome");
+  welcome.remove(); // remove the welcome content
+  drawKittens(); // draw the list of kittens to the page
 }
-
 
 // --------------------------------------------- No Changes below this line are needed
 
 /**
  * Defines the Properties of a Kitten
- * @typedef {{id:sting, name: string, mood: string, affection: number}} Kitten
+ * @typedef {{id:string, name: string, mood: string, affection: number}} Kitten
  */
-
 
 /**
  * Used to generate a random string id for mocked

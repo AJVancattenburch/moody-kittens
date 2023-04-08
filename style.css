@@ -1,17 +1,18 @@
 *{
   box-sizing: border-box;
 }
+
 :root{
   --primary: #abce5c;
   --primary-lighten: #b7f12e;
   --primary-darken: #6f8639;
-  --bg: #e0d9d9;
+  --bg: #1d1222;
   --shadow: 2px 0 5px rgba(49, 49, 49, 0.5);
-  --corners: 0;
+  --corners: 6px;
   --text-color: #3a3838;
-  --dark: #3a3838;
-  --dark-lighten: #504c4c;
-  --light: #fdfdfd;
+  --dark: #302a36;
+  --dark-lighten: #4b375f;
+  --light: #f7f1f1;
   --danger: #ff3737;
 }
 
@@ -28,12 +29,29 @@ body{
 header{
   height: 80px;
 }
+
 main{
   min-height: calc(100vh - (120px + 80px));
 }
+
 #welcome{
   min-height: calc(95vh - (120px + 80px));
 }
+
+div#greeting {
+  background-color: #e8acaa;
+  shape-image-threshold: .5px;
+  opacity: 100%;
+  border-style: inset;
+  border-color: rgb(101, 62, 81);
+  border-width: 5px;
+}
+
+.greeting {
+  font-size: 30px;
+  font-family: 'Catamaran', sans-serif;
+}
+
 footer{
   height: 120px;
 }
@@ -42,48 +60,61 @@ p{
   margin: .5em 0;
 }
 
-img{
+.logo{
   max-width: 100%;
+  background-image: url("https://cdn.firstwefeast.com/assets/2015/01/pizza-space.gif");
+  background-position-y: -4em;
+  background-position-x: -2em;
+  border-radius: var(--corners);
+  border-color: rgba(74, 37, 123, 0.95);
+  border-style: outset;
+  border-width: 0.5em;
+  padding: 5px;
 }
 
 form{
-  margin: 0;
-}
-
-label{
-  display: block;
-  font-size: 12pt;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: var(--corners);
 }
 
 input{
   width: 100%;
   padding: .375rem .75rem;
-  font-size: 1rem;
-  color: var(--light);
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 18px;
+  color: var(--dark);
   background-color: transparent;
   background-clip: padding-box;
   border: none;
   border-bottom: 1px solid var(--primary);
   transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
+
 input:focus{
   outline: none;
 }
 
+
+/*** BUTTON PROPERTIES ***/
 button{
   background-color: var(--primary);
-  color: var(--light);
+  color: black;
   border: none;
+  border-style: groove;
   border-radius: var(--corners);
+  border-color: #646464;
   box-shadow: var(--shadow);
   text-transform: uppercase;
   transition: all .2s ease;
   cursor: pointer;
   padding: .5em;
 }
+
 button:focus{
   outline: none;
 }
+
 button:hover{
   background-color: var(--primary-lighten);
 }
@@ -100,58 +131,125 @@ button.btn-special{
   flex-direction: column;
   justify-content: center;
 }
+
 button.btn-special:after{
   content: "ADD";
   margin-top: 5px;
   font-size: 8pt;
   color: var(--primary);
 }
+
 button.btn-special:focus{
   outline: none;
 }
+
 button.btn-special:hover{
   color: var(--primary);
 }
+
 .container{
   margin: 0 .5em;
 }
 
-.card{
-  background-color: var(--light);
+/*** CARD PROPERTIES ***/
+.name-card {
+  color: var(--dark);
+  background-color: #c4c1d1;
   padding: 1em;
   box-shadow: var(--shadow);
   border-radius: var(--corners);
 }
 
+.card{
+  color: var(--dark);
+  background-color: var(--dark-lighten);
+  padding: 1em;
+  box-shadow: var(--shadow);
+  border-radius: var(--corners);
+  opacity: 90%;
+}
+
 .shadow{
-  filter: drop-shadow(var(--shadow));
+  filter: drop-shadow(0px 0px 5px var(--dark));
 }
 
 
+/*** MOOD GIFS - IMAGE TRANSITIONS ***/
 .kitten img{
-  filter: drop-shadow(2px 4px 6px #1b1b1b);
+  background-image: url("https://i.pinimg.com/originals/a2/37/7a/a2377a1a1b2df7b93eef6b7ec9473f0a.jpg");
+  display: block;
+  width: 300px;
+  height: 335px;
+  margin: 25px;
+  margin-right:300px;
+  filter: drop-shadow(0px 0px 30px #aaa6a6);
   transition: all .35s ease;
 }
-.kitten.happy img{
-  filter: drop-shadow(2px 4px 6px #00ffb3);
+
+.kitten.happy img {
+  background-image: url("https://c.tenor.com/Z0owBbOn9v0AAAAd/tenor.gif");
+  display: block;
+  width: 300px;
+  height: 335px;
+  margin: 25px;
+  filter: drop-shadow(0px 0px 40px #00ffb3);
+  animation: pulsate 2.41s ease-out infinite;
+  transition: all .35s ease;
 }
+
 .kitten.tolerant img{
-  filter: drop-shadow(2px 4px 6px #646464);
+  background-image: url("https://media.tenor.com/images/a412fc62c095ba9901f96a803fd279ad/tenor.gif");
+  display: block;
+  width: 300px;
+  height: 335px;
+  margin: 25px;
+  filter: drop-shadow(2px 4px 30px #646464);
+  transition: all .35s ease;
 }
+
+.kitten.frustrated img{
+  background-image: url("https://c.tenor.com/-2X9RJQkqhgAAAAd/tenor.gif");
+  display: block;
+  width: 300px;
+  height: 335px;
+  margin: 25px;
+  filter: drop-shadow(2px 4px 20px #ff0000) contrast(1);
+  transition: all .35s ease;
+}
+
 .kitten.angry img{
-  filter: drop-shadow(2px 4px 6px #ff0000) contrast(1);
+  background-image: url("https://media.tenor.com/images/fc1cc672a99a7e3cda46381f871e45f7/tenor.gif");
+  display: block;
+  width: 300px;
+  height: 335px;
+  margin: 25px;
+  filter: drop-shadow(4px 6px 50px #ff0000) contrast(1);
+  animation: pulsate .5s ease-out infinite;
+  transition: all .35s ease;
 }
+
 .kitten.gone img{
-  filter: drop-shadow(2px 4px 6px #ff0000) contrast(0);
-}
-.kitten.gone{
+  background-image: url("https://i.pinimg.com/originals/04/c4/30/04c4304d9a96d26ac76c4f0a95834fb1.gif");
+  display: block;
+  width: 300px;
+  height: 335px;
+  margin: 25px;
   color: var(--danger);
   pointer-events: none;
+  transition: all .35s ease;
+}
+
+#cat-card{
+  background-color: var(--dark) ;
+  color: var(--light);
+  shape-image-threshold: .5px;
+  border-radius: var(--corners);
 }
 
 .bg-dark{
   background-color: var(--dark);
 }
+
 .text-light{
   color: var(--light)
 }
@@ -160,6 +258,7 @@ button.btn-special:hover{
   background-color: var(--dark-lighten);
   border-color: var(--dark);
 }
+
 .btn-dark:hover{
   background-color: var(--dark);
   border-color: var(--dark-lighten);
@@ -169,6 +268,7 @@ button.btn-special:hover{
   background-color: red;
   border-color: lightcoral;
 }
+
 .btn-cancel:hover{
   background-color: #fa4141;
   border-color: #ff3737;
@@ -182,15 +282,19 @@ button.btn-special:hover{
   display: flex;
   align-items: center;
 }
+
 .flex-wrap{
   flex-wrap: wrap;
 }
+
 .d-flex.space-between{
   justify-content: space-between;
 }
+
 .d-flex.space-around{
   justify-content: space-around;
 }
+
 .d-flex.justify-content-center{
   justify-content: center;
 }
@@ -198,6 +302,7 @@ button.btn-special:hover{
 .mt-1{
   margin-top: .5em;
 }
+
 .mt-2{
   margin-top: 1em;
 }
@@ -208,9 +313,11 @@ button.btn-special:hover{
 .mb-1{
   margin-bottom: .5em;
 }
+
 .mb-2{
   margin-bottom: 1em;
 }
+
 .mb-3{
   margin-bottom: 1.5em;
 }
@@ -221,6 +328,7 @@ button.btn-special:hover{
 .m-2{
   margin: 1em;
 }
+
 .m-3{
   margin: 1.5em;
 }
@@ -228,9 +336,11 @@ button.btn-special:hover{
 .p-1{
   padding: .5em;
 }
+
 .p-2{
   padding: 1em;
 }
+
 .p-3{
   padding: 1.5em;
 }
@@ -238,9 +348,11 @@ button.btn-special:hover{
 .pt-1{
   padding-top: .5em;
 }
+
 .pt-2{
   padding-top: 1em;
 }
+
 .pt-3{
   padding-top: 1.5em;
 }
@@ -248,9 +360,11 @@ button.btn-special:hover{
 .pb-1{
   padding-bottom: .5em;
 }
+
 .pb-2{
   padding-bottom: 1em;
 }
+
 .pb-3{
   padding-bottom: 1.5em;
 }
@@ -268,10 +382,25 @@ button.btn-special:hover{
   transition: all .3s linear;
   filter: brightness(.8);
 }
+
 .action:hover{
   filter: brightness(1);
 }
 
 .hidden{
   display: none !important;
+}
+
+
+
+@keyframes pulsate {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
 }
