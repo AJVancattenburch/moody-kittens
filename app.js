@@ -1,7 +1,7 @@
-// @ts-nocheck
+
 let kittens = []
-let kitten = {}
-let kittenImg = {
+const kitten = {}
+const kittenImg = {
   happy: "https://c.tenor.com/Z0owBbOn9v0AAAAd/tenor.gif",
   fine: "https://media.tenor.com/images/a412fc62c095ba9901f96a803fd279ad/tenor.gif",
   upset: "https://c.tenor.com/-2X9RJQkqhgAAAAd/tenor.gif",
@@ -46,6 +46,8 @@ function addKitten(event) {
  */
 function saveKittens() {
   window.localStorage.setItem("kittens", JSON.stringify(kittens));
+
+  drawKittens(); // Negates need to always call after 'saveKittens();'
 }
 
 /**
@@ -116,7 +118,7 @@ function pet(id) {
   }
   setKittenMood(kitten);
   saveKittens();
-  drawKittens();
+
   document.getElementById("purr").play();
 }
 
@@ -137,7 +139,6 @@ function catnip(id) {
 
   kitten.affection++; // Will only make kitten so happy
   saveKittens();
-  drawKittens();
 }
 
 function sprayBottle(id) {
@@ -146,7 +147,6 @@ function sprayBottle(id) {
 
   setKittenMood(kitten);
   saveKittens();
-  drawKittens();
 
   document.getElementById("spray").play();
 }
@@ -156,7 +156,6 @@ function evictKitten(id) {
   kittens.splice(index, 1);
 
   saveKittens();
-  drawKittens();
 
   document.getElementById("hiss").play();
 }
@@ -198,7 +197,6 @@ function clearKittens(){
   kittens = []; // removes all kittens from the array
 
   saveKittens(); // save the empty array to localstorage
-  drawKittens(); // draws empty array of kittens
 
   document.getElementById("explode").play();
 }
