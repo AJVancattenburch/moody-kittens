@@ -1,5 +1,4 @@
 // @ts-nocheck
-
 let kittens = []
 let kitten = {}
 let kittenImg = {
@@ -9,9 +8,6 @@ let kittenImg = {
   mad: "https://media.tenor.com/images/fc1cc672a99a7e3cda46381f871e45f7/tenor.gif",
   run: "https://i.pinimg.com/originals/04/c4/30/04c4304d9a96d26ac76c4f0a95834fb1.gif",
 }
-
-
-
 
 /**
  * Called when submitting the new Kitten Form
@@ -24,8 +20,6 @@ function addKitten(event) {
   event.preventDefault()
   let form = event.target
 
-
-  
   let newKitten = {
     id: generateId(),
     name: form.name.value,
@@ -38,23 +32,20 @@ function addKitten(event) {
   if (catCopy) {
     alert ("Hey meow! There's already a kitten by that name")
   } else {
-    kittens.push(newKitten)
-    saveKittens()
+    kittens.push(newKitten);
+    saveKittens();
   }
   
-  form.reset()
-  drawKittens()
-
-
+  form.reset();
+  drawKittens();
 }
-
 
 /**
  * Converts the kittens array to a JSON string then
  * Saves the string to localstorage at the key kittens 
  */
 function saveKittens() {
-  window.localStorage.setItem("kittens", JSON.stringify(kittens))
+  window.localStorage.setItem("kittens", JSON.stringify(kittens));
 }
 
 /**
@@ -63,7 +54,7 @@ function saveKittens() {
  * the kittens array to the retrieved array
  */
 function loadKittens() {
-  let storedKittens = JSON.parse(window.localStorage.getItem("kittens"))
+  let storedKittens = JSON.parse(window.localStorage.getItem("kittens"));
     if (storedKittens){
       kittens = storedKittens
     }
@@ -73,22 +64,22 @@ function loadKittens() {
  * Draw all of the kittens to the kittens element
  */
 function drawKittens() {
-  let kittenListElem = document.getElementById("kittens")
+  let kittenListElem = document.getElementById("kittens");
   let kittensTemplate = ""
   kittens.forEach(kitten =>{
     kittensTemplate += `
-    <div id="cat-card" class="container m-3">
+    <div id="cat-card" class="space-around space-between m-3">
       <div class="p-1 kitten ${kitten.mood} ">
-        <img  src="${kitten.img}" height="335px" width="200px"> 
-        <div class="p-1">
+        <img src="${kitten.img}"> 
+        <div class="p-1 text-center container">
           <h3 class="mt-3 mb-3">Name: ${kitten.name}</h3>
           <h3 class="mt-3 mb-3">Mood: ${kitten.mood}</h3>
           <h3 class="mt-3 mb-3">Affection: ${kitten.affection}</h3>
         </div>
-        <div class="text-center">
-          <button class="shimmer w-40" onclick="pet('${kitten.id}')">Pet</button>
-          <button class="shimmer w-40" onclick="catnip('${kitten.id}')">Catnip</button><br>
-          <button class="shimmer mt-1 w-50" onclick="sprayBottle('${kitten.id}')">Spray Bottle</button>
+        <div class="text-center space-between">
+          <button class="shimmer m-1 w-40" onclick="pet('${kitten.id}')">Pet</button>
+          <button class="shimmer m-1 w-40" onclick="catnip('${kitten.id}')">Catnip</button><br>
+          <button class="shimmer mt-2 w-50" onclick="sprayBottle('${kitten.id}')">Spray Bottle</button>
         </div>
           <button class="shimmer mt-3 btn-cancel" onclick="evictKitten('${kitten.id}')">Evict<br>
           Kitten</button>
@@ -98,22 +89,14 @@ function drawKittens() {
     kittenListElem.innerHTML = kittensTemplate
 }
 
-
-
-
 /**
  * Find the kitten in the array by its id
  * @param {string} id 
  * @return {Kitten}
  */
 function findKittenById(id) {
-  return kittens.find(kitten => kitten.id === id)
-};
-
-
-
-
-
+  return kittens.find(kitten => kitten.id === id);
+}
 
 /**
  * Find the kitten in the array of kittens
@@ -131,9 +114,9 @@ function pet(id) {
   } else {
     kitten.affection = 10;
   }
-  setKittenMood(kitten)
-  saveKittens()
-  drawKittens()
+  setKittenMood(kitten);
+  saveKittens();
+  drawKittens();
   document.getElementById("purr").play();
 }
 
@@ -150,27 +133,31 @@ function catnip(id) {
     kitten.img = kittenImg.fine;
     kitten.mood = "tolerant";
     document.getElementById("treat").play();
-
   }
+
   kitten.affection++; // Will only make kitten so happy
-  saveKittens()
-  drawKittens()
+  saveKittens();
+  drawKittens();
 }
 
 function sprayBottle(id) {
   let kitten = findKittenById(id);
   kitten.affection--;  //angers kitten -1 per spray
-  setKittenMood(kitten)
-  saveKittens()
-  drawKittens()
+
+  setKittenMood(kitten);
+  saveKittens();
+  drawKittens();
+
   document.getElementById("spray").play();
 }
 
 function evictKitten(id) {
   let index = findKittenById(id);
   kittens.splice(index, 1);
+
   saveKittens();
   drawKittens();
+
   document.getElementById("hiss").play();
 }
 
@@ -202,15 +189,18 @@ function setKittenMood(kitten) {
   if (kitten.affection == 0) {
     kitten.img = kittenImg.run;
     kitten.mood = 'gone';
+
     document.getElementById("see-ya").play();
   }
 }
 
 function clearKittens(){
   kittens = []; // removes all kittens from the array
-  saveKittens() // save the empty array to localstorage
-  drawKittens()
-  document.getElementById("explode").play(); // draws empty array of kittens
+
+  saveKittens(); // save the empty array to localstorage
+  drawKittens(); // draws empty array of kittens
+
+  document.getElementById("explode").play();
 }
 
 /**
@@ -219,9 +209,11 @@ function clearKittens(){
  */
 function getStarted() {
   let welcome = document.getElementById("welcome");
+
   document.getElementById("mouse-click").play();
-  welcome.remove() // remove the welcome content
-  drawKittens() // draw the list of kittens to the page
+
+  welcome.remove(); // remove the welcome content
+  drawKittens(); // draw the list of kittens to the page
 }
 
 

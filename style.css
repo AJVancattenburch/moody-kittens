@@ -397,6 +397,10 @@ button.btn-special:hover {
   padding-bottom: 1.5em;
 }
 
+.h-50 {
+  height: 50%;
+}
+
 .w-50 {
   width: 50%;
 }
@@ -451,5 +455,17 @@ background-position: -400px 0;
   }
   100% {
     opacity: 1;
+  }
+}
+
+/*** DEVICE COMPATIBILITY ***/
+.container{
+  width: 90%;
+  margin: auto;
+}
+
+@media screen and (max-width: 700px){
+  .container{
+    width: 90%;
   }
 }
